@@ -12,8 +12,9 @@ class Main
 		x=12; //accessed by static method
 		new Main().main();
 	}
-	void main()
+	static void main()
 	{
 		//y=20; //non-static variable 'y' cannot be accessed by static method
 	}
+
 }
