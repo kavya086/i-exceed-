@@ -1,0 +1,272 @@
+OPERATORS:
+
+
+1.Arithmetic operator
+-> +,-,*,/,~/,%
+
+2.Relational or Comparative operator
+ -> ==,!=,<,>,<=,>=
+
+3.Assignment operator
+ -> =,+=,-=,*=,/=,%=,~/=,^=
+
+4.Conditional operator or ternary operator
+-> ?:
+
+5.Bitwise and shift operator
+-> &,|,!,^,<<,>>,<<<
+
+6.Logical operator
+-> &&,||,!
+
+7.Cascading operator
+-> ..
+
+EXAMPLE:
+
+class class1
+{
+  String name="NAME";
+  int age=0;
+  void display()
+  {
+    print('$name $age');
+  }
+}
+
+void main(){
+  class1 obj=new class1();
+  obj
+    ..age=15 //cascading operator
+    ..name="KAVYA"
+    ..display();
+}
+
+
+OUTPUT:
+
+KAVYA 15
+
+8.Spread operator
+-> ... , ...?
+
+9.Null operator
+->??, ??=
+
+EXAMPLE:
+
+void main()
+{
+  int? x;
+  int y=x??5; //y=5 since x is null
+  x??=4; //x=4 since x is null
+ 
+  print(y);
+  print(x);
+}
+
+
+OUTPUT:
+5
+4
+
+10.type-test operator
+->as, is, is!
+
+EXAMPLE:
+
+void main()
+{
+  print(5 is int);
+  print(5 is! int);
+  String x='5' as String;
+  print(x);
+
+}
+
+OUTPUT:
+
+true
+false
+5
+
+
+CONTROL FLOW:
+
+1.BRANCHING
+2.LOOPING
+
+
+BRANCHING:
+
+1.if statements : checks the conditions, if it is true, the block is executed
+2.if-else statements : checks the conditions, if it is true, true-block is executed, if not false block is executed.
+3.if case:
+used for collections datatype, only for list,records, and objects too.
+
+EXAMPLE:
+
+void main()
+{
+  var pair=["hello",2];
+  if(pair case[int x, int y])
+  {
+    print("bolo");
+  }
+  if(pair case[String u, int v])
+  {
+    print("bolo bhai");
+  }
+}
+
+OUTPUT:
+
+bolo bhai
+
+4.switch:
+
+switch(expression) tries to find any matching value for this expression given, and when the value matches, it executes the specific block.
+
+
+EXAMPLE:
+
+void main()
+{
+  int day=1;
+  String? dayum;
+  switch(day)
+  {
+      case 1: dayum="Sunday";
+              continue newc; //goes to label newc and executes it
+      case 1: dayum="Monday"; //Though, all three have the same case, the first case is only executed.
+      case 1: dayum="Tuesday";
+      case 4: dayum="Wednesday";
+      case 5: dayum="Thursday";
+      case 6: dayum="Friday";
+      case 7: dayum="Saturday";
+ 
+      newc:
+      case 1000:print("This is $dayum");
+  }
+ 
+  print(dayum);
+}
+
+OUTPUT:
+
+This is Sunday
+Sunday
+
+5.Gaurd clauses:
+
+used 'when' keyword too in a condition for if statement.
+executed only when the existing condition and this Gaurd condition is true.
+
+EXAMPLE:
+
+void main()
+{
+  var pair=[5,4];
+  if(pair case[int x,int y] when x<y)
+  {
+    print("YES");
+    print("$x<$y");
+  }
+  if(pair case[int x,int y] when x>y)
+  {
+    print("NO");
+    print("$x>$y");
+  }
+}
+
+OUTPUT:
+
+NO
+5>4
+
+
+LOOPING:
+
+Same-> for, while, do-while
+
+
+LABELING:
+
+Labels are used to identify statements (like loops or blocks), so you can control flow more precisely — especially with break and continue statements.
+They are helpful when you're dealing with nested loops or want to make your code more readable by clearly specifying which loop you're breaking or continuing.
+
+Labels can be used before:
+for loops
+while loops
+do-while loops
+Blocks ({})
+You can't label just any line of code (like a variable declaration) and jump to it — labels are not like goto.
+
+EXAMPLE:
+
+labelName: for (var i = 0; i < 3; i++) {
+  for (var j = 0; j < 3; j++) {
+    if (i == 1 && j == 1) {
+      break labelName; // breaks out of the outer loop
+    }
+    print('i = $i, j = $j');
+  }
+}
+
+EXAMPLE:
+
+outerLoop: for (var i = 1; i <= 3; i++) {
+  for (var j = 1; j <= 3; j++) {
+    if (j == 2) {
+      continue outerLoop; // skips to the next iteration of outer loop
+    }
+    print('i = $i, j = $j');
+  }
+}
+
+
+FUNCTIONS:
+
+
+void main()
+{
+  print(printer("PRINTER"));
+  monitor();
+  print(display(5));
+  print(display(5,6));
+  print(display(5,6,7));
+  named(name:"Kavya",age:21); //name and age denotes named parameters
+  rrequired(msg:"MESSAGE");
+}
+void monitor() //doesn't return any values
+{
+  print("MONITOR");
+}
+String printer(String printing) //return a value, a string
+{
+  return printing;
+}
+int display(int x,[int? y,int? z]) //optional parameters, [] has parameters that are optional
+{
+  y??=0; //assigning 0 if null
+  z??=0; //assigning 0 if null
+  return x+y+z;
+}
+void named({String? name, int? age}) //named parameters are given in {}
+{
+  print("Name: $name \nAge: $age");
+}
+void rrequired({required String? msg}) //required keyword can only be used for named parameters ie, in curly braces{}
+{
+  print(msg);
+}
+
+OUTPUT:
+PRINTER
+MONITOR
+5
+11
+18
+Name: Kavya 
+Age: 21
+MESSAGE
