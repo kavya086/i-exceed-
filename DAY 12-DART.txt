@@ -85,6 +85,12 @@ Instance of 'Student'   //Unlike java, the hash code address of the object is no
 
 Usage of "this" keyword:
 
+1."this" is used to distinguish between instance variables and parameters when they have the same name.
+2.Method chaining (returning this from method)
+3.Calling other methods inside the class (this.displayData())
+
+EXAMPLE 1:
+
 class Sensus
 {
   String? name;
@@ -152,7 +158,7 @@ Age: 21
 Birth Year: 2004
 
 
-EXAMPLE-3:
+EXAMPLE 3:
 
 class Sensus
 {
@@ -187,7 +193,7 @@ Name: Kavya
 Age: 21
 Birth Year: 2004
 
-EXAMPLE-4: -method chaining using "THIS" keyword.
+EXAMPLE 4: -method chaining using "THIS" keyword.
 
 class Student
 {
@@ -246,3 +252,159 @@ City: CBE
 Name: NO NAME
 Age: 0
 City: NOT SPECIFIED
+
+EXAMPLE 5:
+
+class Student
+{
+  String? name;
+  int? std;
+  Student(this.name,this.std);
+  
+  //The above statement is equivalent to 
+  /*Student(String name,int std)
+  {
+    this.name=name;
+    this.std=std;
+  }*/
+
+  Student.named({this.name,this.std}); //named "this" 
+  void display()
+  {
+    print(name);
+    print(std);
+  }
+}
+void main()
+{
+  Student s=Student("K",4);
+  s.display();
+  Student.named(name:"K",std:4).display();
+ 
+}
+
+OUTPUT:
+
+K
+4
+K
+4	
+
+CONSTRUCTORS:
+
+Constructors are special methods defined in a class which has the name as the class itself.They don't need return types and cannot return any values. They can have parameters. Unlike Java, Only one unnamed constructor can be created. That's why named constructors are used in dart.
+1.Default constructors - with no parameters
+2.Parameterized constructors - with parameters or named parameters
+3.Named constructors - with named methods
+4.Factory constructor - returns another constructor method (especially Private Constructor)
+5.Private constructor - postfixed by ._ , only accessed within the constructor
+
+Eg:
+class Main
+{
+  Main()			//default constructor
+	{
+
+	}
+  Main(String name)             //parameterized constructor - ERROR - ONLY ONE UNNAMED CONSTRUCTOR CAN BE CREATED
+       {
+
+       } 	
+}
+
+EXAMPLE:
+
+class Main
+{
+  String? name;
+  factory Main()   //factory constructor - returns another constructor
+  {
+    print("FACTORY constructor");
+    return Main.getName("Hello");
+  }
+//   Main()   //default constructor
+//   {
+//     ERROR- only 1 unnamed constructor is allowed
+//   }
+  Main.getName(this.name) //named constructor
+  {
+    print(name);
+  }
+}
+void main()
+{
+  Main obj= Main();
+  Main.getName("Kavya");
+}
+
+
+OUTPUT:
+
+FACTORY constructor
+Hello
+Kavya
+
+
+EXAMPLE:
+
+class Parameter
+{
+  Parameter(String name, int age)
+  {
+    print("Hello $name. You are $age years old");
+    print("By PARAMETERIZED CONSTRUCTOR\n");
+  }
+  Parameter.named({String? name,int? age})
+  {
+    print("Hello $name. You are $age years old");
+    print("By NAMED PARAMETERIZED CONSTRUCTOR");
+  }
+}
+
+void main()
+{
+  Parameter("Kavya",21);
+  Parameter.named(age:22,name:"Kavya");
+}
+
+OUTPUT:
+
+Hello Kavya. You are 21 years old
+By PARAMETERIZED CONSTRUCTOR
+
+Hello Kavya. You are 22 years old
+By NAMED PARAMETERIZED CONSTRUCTOR
+
+EXAMPLE:
+
+class Private
+{
+  Private._()
+  {
+      int a=10;
+      String b="hey";
+      print("$a $b");
+  }
+
+  Private._hello(int a) //PRIVATE named constructor
+  {
+      String b="hello";
+      print("$a $b");
+  }
+
+  factory Private() //factory constructor that returns private constructor
+  {
+    return Private._();
+  }
+}
+void main()
+{
+  Private();
+  Private._hello(5); //calling private constructor using factory 
+}
+
+
+OUTPUT:
+
+10 hey
+5 hello
