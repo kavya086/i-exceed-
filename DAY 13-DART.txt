@@ -1,0 +1,66 @@
+OOPS-Object Oriented Programming concepts:
+
+1.Encapsulation
+2.Inheritence
+3.Abstraction
+4.Polymorphism
+
+
+ENCAPSULATION:
+
+Encapsulation -> The process of hiding complex processes using private variables, and methods. Those can be accessed by getters and setters. 
+Data (variables) and methods (functions) are wrapped together into a single unit (class), and access to the data is restricted using access modifiers (like private) to hide internal details and protect the object’s integrity.
+
+EXAMPLE:
+
+//ENCAPSULATION
+class Student
+{
+    String? _name; //private variables
+    int? _age;
+    String? _city;
+    bool? _isMarried;
+    void setData(String name,int age,String city)  //Setters for private var (private var can be accessed within this file(LIBRARY), but other files cannot)
+    {
+        this._name=name;
+        this._age=age;
+        this._city=city;
+    }
+   // void setData(this._name,this._age,this._city); -> This type can be only used by constructors to initialize the instance variables
+
+    get getData  //Getters - get keyword is used, getData is not a method, it is a statement or block
+    {
+        return((_name,_age,_city)); 
+    }
+    //above statement is equal to ""get getData=>((_name,_age,_city));""
+    _printData()
+    {
+        print(getData);
+    }
+}
+void main()
+{
+    Student s=Student();
+    s.setData("Kavya",21,"Salem");
+    s._printData();
+}
+
+OUTPUT:
+
+(Kavya, 21, Salem)
+
+EXAMPLE:
+
+import 'new.dart';
+void main()
+{
+    Student s=Student();
+    s.setData("KM",2,"CBE");
+    //s._printData();  //ERROR - Private Method
+    //s._isMarried=true; //ERROR - private variables cannot be accessed in another library
+    print(s.getData);
+}
+
+OUTPUT:
+
+(KM, 2, CBE)
